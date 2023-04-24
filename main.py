@@ -6,16 +6,16 @@ import asyncio
 
 from horizon import client, exceptions
 
-def main():
+async def main():
   logger = logging.getLogger()
   if os.path.isfile("config.yml"):
-    logger.debug("Found config, loading...")
+    logger.info("Found config, loading...")
     with open("config.yml") as file:
       config = yaml.safe_load(file)
   else:
     logger.debug("Config not found, trying to read from env...")
 
-  settings = {"settings": config["settings"], "core": config["core"]}
+  settings = {"settings": config["settings"], "core": config["core"], "token": os.getenv("TOKEN")}
 
   bot = client.HorizonPy(**settings)
 
@@ -31,7 +31,7 @@ def main():
         ):
           raise
 
-  asyncio.gather(bot.run())
+  await asyncio.gather(bot.start())
 
 if __name__ == '__main__':
   asyncio.run(main())
