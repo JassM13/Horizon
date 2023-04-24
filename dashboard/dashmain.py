@@ -8,7 +8,7 @@ class Dashboard(Quart):
 
     @self.route("/")
     def home():
-      return "Hello, World!"
+      return "Hello, World!?"
 
 
   async def start(self, host, port):
