@@ -10,29 +10,31 @@ from discord.ext.commands.view import StringView
 
 from horizon import exceptions
 
+
 class HorizonPy(commands.AutoShardedBot):
+
   def __init__(self, **options):
     super().__init__(
-      commands.when_mentioned_or('!'), intents = discord.Intents.all()
+      commands.when_mentioned_or('!'),
+                     intents=discord.Intents.all()
     )
     self.logger = logging.getLogger("HorizonClient")
     self.core: Dict[str, str]
     self.owner_ids = set(options.pop("owner", []))
     self.created = datetime.now()
     #self.session = aiohttp.ClientSession(loop=self.loop)
-    
+
     self.options = options
 
   async def on_ready(self):
-    print(
-      f"Logged in as {self.user.name}."
-    )
-    
+    print(f"Logged in as {self.user.name}.")
+
     await self.change_presence(activity=discord.Activity(name="with code"))
 
-  async def get_context(
-    self, message: discord.Message, *, cls = commands.Context 
-  ) -> commands.Context:
+  async def get_context(self,
+                        message: discord.Message,
+                        *,
+                        cls=commands.Context) -> commands.Context:
     ctx = await super().get_context(message, cls=cls)
 
     return ctx
