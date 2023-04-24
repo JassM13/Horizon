@@ -1,0 +1,8 @@
+core:
+  token:
+  prefix: !
+
+settings:
+  owners: 
+    - 385902548655144973
+  

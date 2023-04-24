@@ -4,18 +4,19 @@ import yaml
 
 import asyncio
 
+from dashboard import dashmain
 from horizon import client, exceptions
 
-def main():
+async def main():
   logger = logging.getLogger()
   if os.path.isfile("config.yml"):
-    logger.debug("Found config, loading...")
+    logger.info("Found config, loading...")
     with open("config.yml") as file:
       config = yaml.safe_load(file)
   else:
     logger.debug("Config not found, trying to read from env...")
 
-  settings = {"settings": config["settings"], "core": config["core"]}
+  settings = {"settings": config["settings"], "core": config["core"], "token": os.getenv("TOKEN")}
 
   bot = client.HorizonPy(**settings)
 
@@ -31,7 +32,14 @@ def main():
         ):
           raise
 
-  asyncio.gather(bot.run())
-
-if __name__ == '__main__':
+  tasks = [
+    bot.start(), 
+    dashmain.Dashboard().start(
+    host="0.0.0.0",
+    port="8080"
+  )
+  ]   
+  await asyncio.gather(*tasks)
+  
+if __name__ == '__main__': 
   asyncio.run(main())
