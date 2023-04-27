@@ -39,14 +39,14 @@ class HorizonPy(commands.AutoShardedBot):
 
     return ctx
 
-  def load_module(self, name: str):
+  async def load_module(self, name: str):
     if name in self.extensions:
       return
 
-    self.load_extension(f"modules.{name}")
+    await self.load_extension(f"modules.{name}")
 
-  def reload_module(self, name: str):
-    self.reload_extension(f"modules.{name}")
+  async def reload_module(self, name: str):
+    await self.reload_extension(f"modules.{name}")
 
   async def start(self, bot: bool = True):
     print("Bot running...")

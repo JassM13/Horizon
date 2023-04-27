@@ -29,7 +29,7 @@ async def main():
     if not module.startswith("."):
       try:
         logger.debug(f"Loading module {module}")
-        bot.load_module(module)
+        await bot.load_module(module)
       except exceptions.MissingFeatures as exc:
         if (settings.get("database", None) and exc.features != {"database"}):
           raise

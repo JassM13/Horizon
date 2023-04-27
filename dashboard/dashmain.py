@@ -3,7 +3,7 @@ from quart import Quart
 class Dashboard(Quart):
   def __init__(self):
     super().__init__(
-      import_name = "Dashboard"
+      import_name = __name__
     )
 
     @self.route("/")
@@ -12,5 +12,4 @@ class Dashboard(Quart):
 
 
   async def start(self, host, port):
-    print("running...")
     await super().run_task(host=host, port=port)
