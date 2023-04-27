@@ -23,6 +23,7 @@ async def main():
     "token": os.getenv("TOKEN")
   }
 
+
   bot = client.HorizonPy(**settings)
 
   for module in os.listdir("modules"):
