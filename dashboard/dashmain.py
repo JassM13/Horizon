@@ -11,5 +11,5 @@ class Dashboard(Quart):
       return "Hello, World!?"
 
 
-  async def start(self, host, port):
-    await super().run_task(host=host, port=port)
+  async def start(self, port):
+    await super().run_task(port=port)

@@ -9,7 +9,7 @@ from horizon import client, exceptions
 
 
 async def main():
-  logger = logging.getLogger()
+  logger = logging.getLogger("main")
   if os.path.isfile("config.yml"):
     logger.info("Found config, loading...")
     with open("config.yml") as file:
@@ -37,7 +37,7 @@ async def main():
 
   tasks = [
     bot.start(),
-    dashmain.Dashboard().start(host="0.0.0.0", port="8080")
+    dashmain.Dashboard().start(port="8080")
   ]
   await asyncio.gather(*tasks)
 
