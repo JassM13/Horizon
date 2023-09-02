@@ -17,7 +17,7 @@ class InfoCommands(commands.Cog):
     await ctx.send(embed=embed)
 
 
-  @commands.command()
+  @commands.hybrid_command()
   async def ping(self, ctx):
     pre_typing = time.monotonic()
     await ctx.typing()
